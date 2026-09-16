@@ -6,7 +6,7 @@ const musicButton = document.getElementById("musicButton");
    FORCE MUSIC FILE
 ========================= */
 
-music.src = "./music/anniversary-song.mp3";
+music.src = "./anniversary-song.mp3";
 
 music.load();
 
