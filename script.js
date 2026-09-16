@@ -1,40 +1,57 @@
-const music = new Audio("./anniversary-song.mp3");
+const music = document.getElementById("music");
+const musicButton = document.getElementById("musicButton");
 
-// Correct music file
-const music = new Audio("./music/anniversary-song.mp3");
 
-music.preload = "auto";
-music.loop = false;
+/* =========================
+   FORCE MUSIC FILE
+========================= */
 
-// Play / Pause
-musicButton.onclick = async function () {
+music.src = "./music/anniversary-song.mp3";
 
-    try {
+music.load();
 
-        if (music.paused) {
 
-            await music.play();
+/* =========================
+   PLAY / PAUSE
+========================= */
 
-            musicButton.textContent = "❚❚";
+musicButton.addEventListener("click", function () {
 
-        } else {
+    if (music.paused) {
 
-            music.pause();
+        music.play()
+            .then(function () {
 
-            musicButton.textContent = "▶";
+                musicButton.textContent = "❚❚";
 
-        }
+            })
+            .catch(function (error) {
 
-    } catch (error) {
+                console.log("Music Error:", error);
 
-        console.log("Music Error:", error);
+                alert(
+                    "Song play aagala 😢\n\n" +
+                    "Please check:\n\n" +
+                    "music folder → anniversary-song.mp3"
+                );
 
-        alert("Song play aagala. Please check the music file.");
+            });
+
+    } else {
+
+        music.pause();
+
+        musicButton.textContent = "▶";
 
     }
-};
 
-// When song finishes
+});
+
+
+/* =========================
+   SONG ENDED
+========================= */
+
 music.addEventListener("ended", function () {
 
     musicButton.textContent = "▶";
